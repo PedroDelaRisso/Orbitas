@@ -6,13 +6,13 @@ int main()
     sf::Vector2f windowCenter((float)window.getSize().x / 2.0f, (float)window.getSize().y / 2.0f);
 
     CelestialBody sun(50.0f, 0.0f);
-    CelestialBody mercury(3.0f, 2.0f);
-    CelestialBody venus(8.0f, 2.5f);
-    CelestialBody earth(10.0f, 3.0f);
-    CelestialBody moon(2.0f, 12.0f);
-    CelestialBody mars(4.0f, 1.5f);
-    CelestialBody phobos(1.0f, 15.0f);
-    CelestialBody deimos(1.0f, 20.0f);
+    CelestialBody mercury(3.0f, 241.4f);
+    CelestialBody venus(8.0f, 665.7f);
+    CelestialBody earth(10.0f, 1000.0f);
+    CelestialBody moon(2.0f, 2.7f);
+    CelestialBody mars(4.0f, 1882.2f);
+    CelestialBody deimos(1.0f, 3.4f);
+    CelestialBody phobos(1.0f, 8.6f);
 
     sun.SetPosition(windowCenter);
     sun.SetOrbitRadius(0.0f);
@@ -33,9 +33,12 @@ int main()
     deimos.SetColor(sf::Color(140, 140, 140));
     phobos.SetColor(sf::Color(140, 140, 140));
 
+    float deltaTime = 0.0f;
+    sf::Clock clock;
 
     while(window.isOpen())
     {
+        deltaTime = clock.restart().asMicroseconds();
         sf::Event evnt;
         while(window.pollEvent(evnt))
         {
@@ -58,13 +61,13 @@ int main()
         }
 
 
-        mercury.OrbitAround(sun.GetPosition());
-        venus.OrbitAround(sun.GetPosition());
-        earth.OrbitAround(sun);
-        moon.OrbitAround(earth.GetPosition());
-        mars.OrbitAround(sun.GetPosition());
-        deimos.OrbitAround(mars.GetPosition());
-        phobos.OrbitAround(mars.GetPosition());
+        mercury.OrbitAround(sun.GetPosition(), deltaTime);
+        venus.OrbitAround(sun.GetPosition(), deltaTime);
+        earth.OrbitAround(sun, deltaTime);
+        moon.OrbitAround(earth.GetPosition(), deltaTime);
+        mars.OrbitAround(sun.GetPosition(), deltaTime);
+        deimos.OrbitAround(mars.GetPosition(), deltaTime);
+        phobos.OrbitAround(mars.GetPosition(), deltaTime);
 
         window.clear();
         sun.Draw(window);

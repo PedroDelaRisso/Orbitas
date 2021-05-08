@@ -1,12 +1,13 @@
 #include "CelestialBody.h"
 
-CelestialBody::CelestialBody(float radius, float orbitSpeed)
+CelestialBody::CelestialBody(float radius, float orbitTime)
 {
     this->body.setRadius(radius);
-    this->orbitSpeed = orbitSpeed;
+    this->orbitTime = orbitTime;
     body.setOrigin(+body.getRadius(), +body.getRadius());
     orbitRadius = 0;
     angle = 0.0f;
+    totalTime = 0.0f;
 }
 
 void CelestialBody::Draw(sf::RenderWindow& window)
@@ -14,17 +15,17 @@ void CelestialBody::Draw(sf::RenderWindow& window)
 	window.draw(body);
 }
 
-void CelestialBody::OrbitAround(sf::Vector2f orbitCenter)
+void CelestialBody::OrbitAround(sf::Vector2f orbitCenter, float deltaTime)
 {
-    if (angle < 2 * M_PI)
-    {
-        body.setPosition(orbitCenter.x + cos(angle) * orbitRadius, orbitCenter.y + sin(angle) * orbitRadius);
-        angle += orbitSpeed / 10000.0f;
-    }
-    else angle = 0;
+    totalTime += deltaTime;
+    body.setPosition(orbitCenter.x + cos(angle) * orbitRadius, orbitCenter.y + sin(angle) * orbitRadius);
+    angle += (M_PI / 2) / orbitTime;
+    if (angle >= M_PI * 2) angle = 0;
+
+
 }
 
-void CelestialBody::OrbitAround(CelestialBody parent)
+void CelestialBody::OrbitAround(CelestialBody parent, float deltaTime)
 {
-    this->OrbitAround(parent.GetPosition());
+    this->OrbitAround(parent.GetPosition(), deltaTime);
 }

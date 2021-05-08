@@ -1,5 +1,4 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(519,5): warning MSB8028: O diretório intermediário (x64\Debug\) contém arquivos compartilhados de outro projeto (SFML Tutorial 2.vcxproj). Isso pode levar a um comportamento incorreto de limpeza e recompilação.
   main.cpp
-  CelestialBody.cpp
-  Gerando Código...
-  Orbitas.vcxproj -> C:\Users\Pedro\Documents\Code\graphics tests\SFML Tutorial\SFML Tutorial 2 - Copia\x64\Debug\Orbitas.exe
+C:\Users\Pedro\Documents\Code\graphics tests\SFML Tutorial\Orbitas\Orbitas\main.cpp(41,51): warning C4244: '=': conversão de 'sf::Int64' para 'float', possível perda de dados
+  Orbitas.vcxproj -> C:\Users\Pedro\Documents\Code\graphics tests\SFML Tutorial\Orbitas\x64\Debug\Orbitas.exe
